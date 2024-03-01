@@ -17,6 +17,8 @@ We want to build opticks with exactly the same tools that we want to build artg4
       ln -s ${OptiX_INSTALL_DIR} OptiX
       cd ${WORK_DIR}
 
+      
+      cat > setup_opticks.sh << EOF
       #------------------------------------------------------------------------------------
       # to optionally enable logging in relevant classes uncomment the following lines
       #export SEvt=INFO
@@ -59,7 +61,6 @@ We want to build opticks with exactly the same tools that we want to build artg4
               esac
           fi
       }
-
       _path_append() {
           if [ -n "$2" ]; then
               case ":$(eval "echo \$$1"):" in
@@ -157,7 +158,9 @@ We want to build opticks with exactly the same tools that we want to build artg4
           ${CUDA_SAMPLES}/bin/x86_64/linux/release/deviceQuery
       }
       export OPTICKS_KEY=CaTS.X4PhysicalVolume.World_PV.6a511c07e6d72b5e4d71b74bd548e8fd
+      EOF
 
+      
 
 
       
