@@ -9,6 +9,7 @@ We want to build opticks with exactly the same tools that we want to build artg4
       setup ninja v1_11_0
       setup cmake v3_27_4
       git clone https://github.com/simoncblyth/opticks.git
+      cd opticks
       git tag
       git checkout v0.2.7
 
