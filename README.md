@@ -9,9 +9,10 @@
       unsetup geant4
       setup geant4 v4_11_1_p01ba -q e20:prof
       setup ninja v1_11_0
-      setup cmake v3_25_2
+      setup cmake v3_27_4
       export MRB_PROJECT=artg4tk
       setup mrb 
+      setup  cetmodules v3_24_01
       # do this once
       mkdir artg4tktest
       cd artg4tktest
