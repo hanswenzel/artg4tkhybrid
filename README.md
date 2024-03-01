@@ -32,6 +32,7 @@ We want to build opticks with exactly the same tools that we want to build artg4
       export CUDA_INSTALL_DIR=/opt/nvidia/hpc_sdk/Linux_x86_64/23.3/cuda/11.8
       export PATH=${CUDA_INSTALL_DIR}/bin:$PATH
       export CUDA_SAMPLES=/data/software/cuda-samples
+      export G4INSTALL=/cvmfs/larsoft.opensciencegrid.org/products/geant4/v4_11_1_p01ba/Linux64bit+3.10-2.17-e20-prof
       export LOCAL_BASE=${WORK_DIR}/local
       export  CMAKE_PREFIX_PATH=/cvmfs/larsoft.opensciencegrid.org/products/boost/v1_80_0/Linux64bit+3.10-2.17-e20-prof/:${G4INSTALL}:${LOCAL_BASE}/opticks/externals:${OptiX_INSTALL_DIR}:${WORK_DIR}/opticks/cmake/Modules/:${WORK_DIR}/local/opticks:${WORK_DIR}/local/opticks:${WORK_DIR}/local/opticks/externals/:${CLHEP_BASE_DIR}
       export PYTHONPATH=$WORK_DIR
