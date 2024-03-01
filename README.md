@@ -1,6 +1,16 @@
 # build Opticks
 We want to build opticks with exactly the same tools that we want to build artg4tk later on.     
-      
+      export TOP_DIR=${PWD}
+      source /cvmfs/larsoft.opensciencegrid.org/products/setup
+      setup larsoft v09_74_00 -qe20:prof
+      unsetup geant4
+      setup geant4 v4_11_1_p01ba -q e20:prof
+      setup ninja v1_11_0
+      setup cmake v3_27_4
+      git clone https://github.com/simoncblyth/opticks.git
+      git tag
+      git checkout v0.2.7
+
 # build artg4tk vs Opticks     
       
       export TOP_DIR=${PWD}
