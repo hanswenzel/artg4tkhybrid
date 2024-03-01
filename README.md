@@ -1,5 +1,5 @@
 # build Opticks
-      
+We want to build opticks with exactly the same tools that we want to build artg4tk later on.     
       
 # build artg4tk vs Opticks     
       
