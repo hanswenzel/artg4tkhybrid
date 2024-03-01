@@ -1,3 +1,8 @@
+# First build Opticks
+      
+      
+      
+      
       export TOP_DIR=${PWD}
       #
       # Build artg4tk and envs
