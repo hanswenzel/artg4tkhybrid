@@ -1,7 +1,7 @@
-# First build Opticks
+# build Opticks
       
       
-      
+# build artg4tk vs Opticks     
       
       export TOP_DIR=${PWD}
       #
