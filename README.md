@@ -1,6 +1,3 @@
-      #
-      # Directory
-      #
       export TOP_DIR=${PWD}
       #
       # Build artg4tk and envs
@@ -25,6 +22,12 @@
       mrbsetenv
       cd $MRB_BUILDDIR
       source /data/syjun/g4gpu/setup_test.sh
+      export OptiX_INSTALL_DIR=/home/wenzel/NVIDIA-OptiX-SDK-7.5.0-linux64-x86_64
+      export LOCAL_BASE=${WORK_DIR}/local
+      export OPTICKS_HOME=${WORK_DIR}/opticks
+      export OPTICKS_OPTIX_PREFIX=${OptiX_INSTALL_DIR}
+      export OPTICKS_PREFIX=${LOCAL_BASE}/opticks
+      export CUDA_INSTALL_DIR=/opt/nvidia/hpc_sdk/Linux_x86_64/23.3/cuda/11.8
       mrb b -j 10 -DWITH_G4CXOPTICKS=ON  \
             -DCMAKE_PREFIX_PATH="${LOCAL_BASE}/opticks/externals;${LOCAL_BASE}/opticks;${OptiX_INSTALL_DIR}" \
             -DOPTICKS_PREFIX=${LOCAL_BASE}/opticks 
