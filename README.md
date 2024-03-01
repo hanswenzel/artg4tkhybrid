@@ -186,7 +186,9 @@ We want to build opticks with exactly the same tools that we want to build artg4
 
       ninja install
       cd ../CaTS-install/bin
-      
+      export LD_LIBRARY_PATH=.:$LD_LIBRARY_PATH
+      ./CaTS -g simpleLArTPC.gdml  -m time.mac
+
 # build artg4tk vs Opticks     
       
       export TOP_DIR=${PWD}
