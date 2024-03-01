@@ -16,6 +16,150 @@ We want to build opticks with exactly the same tools that we want to build artg4
       cd ${WORK_DIR}/local/opticks/externals/
       ln -s ${OptiX_INSTALL_DIR} OptiX
       cd ${WORK_DIR}
+
+      #------------------------------------------------------------------------------------
+      # to optionally enable logging in relevant classes uncomment the following lines
+      #export SEvt=INFO
+      #export G4CXOpticks=INFO
+      #export SEventConfig=INFO
+      #export CSGOptiX=INFO
+      #export SSim__stree_level=2
+      #------------------------------------------------------------------------------------
+      export WORK_DIR=${PWD}
+      # make sure you set OptiX_INSTALL_DIR,OPTICKS_COMPUTE_CAPABILITY,CUDA_INSTALL_DIR correctly for your system 
+      export OptiX_INSTALL_DIR=/home/wenzel/NVIDIA-OptiX-SDK-7.5.0-linux64-x86_64
+      export OPTICKS_COMPUTE_CAPABILITY=75
+      export CUDA_INSTALL_DIR=/opt/nvidia/hpc_sdk/Linux_x86_64/23.3/cuda/11.8
+      export PATH=${CUDA_INSTALL_DIR}/bin:$PATH
+      export CUDA_SAMPLES=/data/software/cuda-samples
+      export LOCAL_BASE=${WORK_DIR}/local
+      export  CMAKE_PREFIX_PATH=/cvmfs/larsoft.opensciencegrid.org/products/boost/v1_80_0/Linux64bit+3.10-2.17-e20-prof/:${G4INSTALL}:${LOCAL_BASE}/opticks/externals:${OptiX_INSTALL_DIR}:${WORK_DIR}/opticks/cmake/Modules/:${WORK_DIR}/local/opticks:${WORK_DIR}/local/opticks:${WORK_DIR}/local/opticks/externals/:${CLHEP_BASE_DIR}
+      export PYTHONPATH=$WORK_DIR
+      export OPTICKS_HOME=${WORK_DIR}/opticks
+      export OPTICKS_PREFIX=${WORK_DIR}/local/opticks                            
+      export OPTICKS_INSTALL_PREFIX=$LOCAL_BASE/opticks
+      export OPTICKS_OPTIX_PREFIX=/home/wenzel/NVIDIA-OptiX-SDK-7.5.0-linux64-x86_64
+      export OPTICKS_CUDA_PREFIX=${CUDA_INSTALL_DIR}
+      export OPTICKS_EMBEDDED_COMMANDLINE_EXTRA="--rngmax 100 --rtx 1 --skipaheadstep 10000"
+      export OPTICKS_MAX_PHOTON=10000000
+      opticks-(){ . ${OPTICKS_HOME}/opticks.bash && opticks-env $* ; }
+      op(){ op.sh $* ; }
+      o(){ cd $(opticks-home) ; hg st ; }
+      _path_prepend() {
+          if [ -n "$2" ]; then
+              case ":$(eval "echo \$$1"):" in
+                  *":$2:"*) :;;
+                  *) eval "export $1=$2\${$1:+\":\$$1\"}" ;;
+              esac
+          else
+              case ":$PATH:" in
+                  *":$1:"*) :;;
+                  *) export PATH="$1${PATH:+":$PATH"}" ;;
+              esac
+          fi
+      }
+
+      _path_append() {
+          if [ -n "$2" ]; then
+              case ":$(eval "echo \$$1"):" in
+                  *":$2:"*) :;;
+                  *) eval "export $1=\${$1:+\"\$$1:\"}$2" ;;
+              esac
+          else
+              case ":$PATH:" in
+                  *":$1:"*) :;;
+                  *) export PATH="${PATH:+"$PATH:"}$1" ;;
+              esac
+          fi
+      }
+      _path_prepend "${LOCAL_BASE}/bin"
+      # make sure to add the compiler options
+      new=" -fPIC" 
+      case ":${CXXFLAGS:=$new}:" in
+          *:"$new":*)  ;;
+          *) CXXFLAGS="$CXXFLAGS:$new"  ;;
+      esac
+      new=" -fPIC" 
+      case ":${CFLAGS:=$new}:" in
+          *:"$new":*)  ;;
+          *) CFLAGS="$CFLAGS:$new"  ;;
+      esac
+      # speed up the make process
+      new=" -j$(($(grep -c ^processor /proc/cpuinfo) - 1))" 
+      case ":${MAKEFLAGS:=$new}:" in
+          *:"$new":*)  ;;
+          *) MAKEFLAGS="$MAKEFLAGS:$new"  ;;
+      esac
+      # deal with the $LD_LIBRARYPATH
+      new=${OptiX_INSTALL_DIR}/lib64/
+      case ":${LD_LIBRARY_PATH:=$new}:" in
+          *:"$new":*)  ;;
+          *) LD_LIBRARY_PATH="$new:$LD_LIBRARY_PATH"  ;;
+      esac
+      new=${OPTICKS_HOME}/externals/lib
+      case ":${LD_LIBRARY_PATH:=$new}:" in
+          *:"$new":*)  ;;
+          *) LD_LIBRARY_PATH="$new:$LD_LIBRARY_PATH"  ;;
+      esac
+      new=${CUDA_INSTALL_DIR}/lib64/
+      case ":${LD_LIBRARY_PATH:=$new}:" in
+          *:"$new":*)  ;;
+          *) LD_LIBRARY_PATH="$new:$LD_LIBRARY_PATH"  ;;
+      esac
+      new=${LOCAL_BASE}/opticks/lib/
+      case ":${LD_LIBRARY_PATH:=$new}:" in
+          *:"$new":*)  ;;
+          *) LD_LIBRARY_PATH="$new:$LD_LIBRARY_PATH"  ;;
+      esac
+
+      opticks-
+      new=${CUDA_INSTALL_DIR}/bin
+      case ":${PATH:=$new}:" in
+          *:"$new":*)  ;;
+          *) PATH="$new:$PATH"  ;;
+      esac
+      new=${OPTICKS_HOME}/bin/
+      case ":${PATH:=$new}:" in
+          *:"$new":*)  ;;
+          *) PATH="$new:$PATH"  ;;
+      esac
+      new=${OPTICKS_HOME}/ana/
+      case ":${PATH:=$new}:" in
+          *:"$new":*)  ;;
+          *) PATH="$new:$PATH"  ;;
+      esac
+      new=${LOCAL_BASE}/opticks/lib/
+      case ":${PATH:=$new}:" in
+          *:"$new":*)  ;;
+          *) PATH="$new:$PATH"  ;;
+      esac
+      new=${CUDA_SAMPLES}/bin/x86_64/linux/release/
+      case ":${PATH:=$new}:" in
+          *:"$new":*)  ;;
+          *) PATH="$new:$PATH"  ;;
+      esac
+      oinfo-(){
+          echo 'LD_LIBRARY_PATH:';
+          echo '================';
+          echo  ${LD_LIBRARY_PATH}| tr : \\n;
+          echo;
+          echo 'PATH:';
+          echo '=====';
+          echo  ${PATH}| tr : \\n;
+          echo;
+          echo 'CMAKE_PREFIX_PATH:';
+          echo '==================';
+          echo  ${CMAKE_PREFIX_PATH}| tr : \\n;
+          }
+      dinfo-(){    
+          nvidia-smi;
+          ${CUDA_SAMPLES}/bin/x86_64/linux/release/deviceQuery
+      }
+      export OPTICKS_KEY=CaTS.X4PhysicalVolume.World_PV.6a511c07e6d72b5e4d71b74bd548e8fd
+
+
+
+      
       opticks-externals-install >& install_ext.log &
       tail -f install_ext.log
       cd ${WORK_DIR}
