@@ -178,6 +178,8 @@ EOF
 
 # build CaTS
 
+CaTSis a stand alone Geant4 application. Building and running CaTS is a good test that the environment 
+
       git clone https://github.com/hanswenzel/CaTS.git
       cd CaTS/
       source (path to opticks WORK_DIR)/setup_opticks.sh 
