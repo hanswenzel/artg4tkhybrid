@@ -1,7 +1,7 @@
 # build Opticks
 We want to build opticks with exactly the same tools that we use to build artg4tk later on. 
 
-      cat <<EOF < test.sh
+      cat <test.sh<<EOF
       export WORK_DIR=${PWD}
       source /cvmfs/larsoft.opensciencegrid.org/products/setup
       setup larsoft v09_74_00 -qe20:prof
@@ -18,6 +18,7 @@ We want to build opticks with exactly the same tools that we use to build artg4t
       ln -s ${OptiX_INSTALL_DIR} OptiX
       cd ${WORK_DIR}
       EOF
+      
       
       cat > setup_opticks.sh << EOF
       #------------------------------------------------------------------------------------
