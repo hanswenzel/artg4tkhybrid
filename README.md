@@ -178,11 +178,11 @@ tail -f install_full.log
 ```
 ```bash
 git clone https://github.com/hanswenzel/artg4tkhybrid.git
-
+cp artg4tkhybrid/cmake/OpticksOptionsAsExternal.cmake opticks/cmake/Modules/
 ```
 # build CaTS
 
-CaTSis a stand alone Geant4 application. Building and running CaTS is a good test that the environment as well as NVIDIA drivers are setup correctly.
+CaTSi s a stand alone Geant4 application. Building and running CaTS is a good test that the environment as well as NVIDIA drivers are setup correctly.
 
 ```bash 
 git clone https://github.com/hanswenzel/CaTS.git
@@ -209,7 +209,7 @@ export LD_LIBRARY_PATH=.:$LD_LIBRARY_PATH
 # build artg4tk vs Opticks  
 
  ```bash      
- export TOP_DIR=${PWD}
+ export WORK_DIR=${PWD}
  #
  # Build artg4tk and envs
  #
@@ -248,14 +248,14 @@ export LD_LIBRARY_PATH=.:$LD_LIBRARY_PATH
             -DCMAKE_MODULE_PATH=${OPTICKS_HOME}/cmake/Modules
 
  mrb b -j 10
- cd ${TOP_DIR}
+ cd ${WORK_DIR}
  #
  # build with opticks
  #
- export LOCAL_BASE=/data/syjun/g4gpu/src/local
- export OPTICKS_HOME=/data/syjun/g4gpu/src/opticks
+ export LOCAL_BASE=${TOP_DIR}/local
+ export OPTICKS_HOME=${TOP_DIR}/opticks
  export OptiX_INSTALL_DIR=/home/wenzel/NVIDIA-OptiX-SDK-7.5.0-linux64-x86_64
- export OPTICKS_COMPUTE_CAPABILITY=86
+ export OPTICKS_COMPUTE_CAPABILITY=75
  export CUDA_INSTALL_DIR=/opt/nvidia/hpc_sdk/Linux_x86_64/23.3/cuda/11.8
  export PATH=${CUDA_INSTALL_DIR}/bin:$PATH
  export CUDA_SAMPLES=/data/software/cuda-samples
@@ -264,6 +264,15 @@ export LD_LIBRARY_PATH=.:$LD_LIBRARY_PATH
  ${OptiX_INSTALL_DIR}
 
  source /data/syjun/g4gpu/setup_test.sh
+export WORK_DIR=${PWD}
+export OptiX_INSTALL_DIR=/home/wenzel/NVIDIA-OptiX-SDK-7.5.0-linux64-x86_64
+# below are various Geant4 versions:
+export LOCAL_BASE=${WORK_DIR}/local
+export OPTICKS_HOME=${WORK_DIR}/opticks
+export OPTICKS_OPTIX_PREFIX=${OptiX_INSTALL_DIR}
+export OPTICKS_PREFIX=${LOCAL_BASE}/opticks
+export CUDA_INSTALL_DIR=/opt/nvidia/hpc_sdk/Linux_x86_64/23.3/cuda/11.8
+
  mrb b -j 10 -DWITH_G4CXOPTICKS=ON  \
  -DCMAKE_PREFIX_PATH="${LOCAL_BASE}/opticks/externals;${LOCAL_BASE}/opticks;${OptiX_INSTALL_DIR}" \
  -DOPTICKS_PREFIX=${LOCAL_BASE}/opticks \
