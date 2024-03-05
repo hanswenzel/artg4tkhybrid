@@ -176,6 +176,10 @@ cd ${WORK_DIR}
 opticks-full  >& install_full.log &
 tail -f install_full.log
 ```
+```bash
+git clone https://github.com/hanswenzel/artg4tkhybrid.git
+
+```
 # build CaTS
 
 CaTSis a stand alone Geant4 application. Building and running CaTS is a good test that the environment as well as NVIDIA drivers are setup correctly.
