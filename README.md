@@ -17,8 +17,7 @@ mkdir -p \${WORK_DIR}/local/opticks/externals/
 cd \${WORK_DIR}/local/opticks/externals/
 ln -s \${OptiX_INSTALL_DIR} OptiX
 cd \${WORK_DIR}
-EOF
-\\n
+EOF'\n'
 ```  
       
       cat > setup_opticks.sh << EOF
