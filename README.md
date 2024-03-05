@@ -2,7 +2,7 @@
 We want to build opticks with exactly the same tools that we use to build artg4tk later on. 
 
       cat > setup_test.sh << EOF
-      export TOP_DIR=${PWD}
+      export WORK_DIR=\${PWD}
       source /cvmfs/larsoft.opensciencegrid.org/products/setup
       setup larsoft v09_74_00 -qe20:prof
       unsetup geant4
@@ -13,10 +13,10 @@ We want to build opticks with exactly the same tools that we use to build artg4t
       cd opticks
       git tag
       git checkout v0.2.7
-      mkdir -p ${WORK_DIR}/local/opticks/externals/
-      cd ${WORK_DIR}/local/opticks/externals/
-      ln -s ${OptiX_INSTALL_DIR} OptiX
-      cd ${WORK_DIR}
+      mkdir -p \${WORK_DIR}/local/opticks/externals/
+      cd \${WORK_DIR}/local/opticks/externals/
+      ln -s \${OptiX_INSTALL_DIR} OptiX
+      cd \${WORK_DIR}
       
       EOF
       
