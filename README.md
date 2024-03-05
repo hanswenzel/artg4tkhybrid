@@ -166,19 +166,19 @@ export OPTICKS_KEY=CaTS.X4PhysicalVolume.World_PV.6a511c07e6d72b5e4d71b74bd548e8
 EOF
 
 ```
- Now setup the environment and build the Opticks externals and Opticks     
+ Now setup the environment and build the Opticks externals and Opticks itself.  
 
-
-      source setup_opticks.sh
-      opticks-externals-install >& install_ext.log &
-      tail -f install_ext.log
-      cd ${WORK_DIR}
-      opticks-full  >& install_full.log &
-      tail -f install_full.log
-
+```bash 
+source setup_opticks.sh
+opticks-externals-install >& install_ext.log &
+tail -f install_ext.log
+cd ${WORK_DIR}
+opticks-full  >& install_full.log &
+tail -f install_full.log
+```
 # build CaTS
 
-CaTSis a stand alone Geant4 application. Building and running CaTS is a good test that the environment 
+CaTSis a stand alone Geant4 application. Building and running CaTS is a good test that the environment as well as NVIDIA drivers are setu correctly.
 
       git clone https://github.com/hanswenzel/CaTS.git
       cd CaTS/
