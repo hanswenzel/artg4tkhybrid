@@ -1,7 +1,7 @@
 # build Opticks
 We want to build opticks with exactly the same tools that we use to build artg4tk later on. 
 ```bash
-cat > test.sh << EOF
+cat > test.sh <<EOF
 export WORK_DIR=\${PWD}
 source /cvmfs/larsoft.opensciencegrid.org/products/setup
 setup larsoft v09_74_00 -qe20:prof
@@ -17,7 +17,7 @@ mkdir -p \${WORK_DIR}/local/opticks/externals/
 cd \${WORK_DIR}/local/opticks/externals/
 ln -s \${OptiX_INSTALL_DIR} OptiX
 cd \${WORK_DIR}
-EOF\n
+EOF
 ```  
       
       cat > setup_opticks.sh << EOF
