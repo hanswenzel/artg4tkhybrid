@@ -166,7 +166,7 @@ export OPTICKS_KEY=CaTS.X4PhysicalVolume.World_PV.6a511c07e6d72b5e4d71b74bd548e8
 EOF
 
 ```
-      
+ Now setup the environment and build the Opticks externals and Opticks     
 
 
       source setup_opticks.sh
