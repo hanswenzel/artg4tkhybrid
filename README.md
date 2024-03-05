@@ -18,7 +18,7 @@ We want to build opticks with exactly the same tools that we use to build artg4t
       ln -s \${OptiX_INSTALL_DIR} OptiX
       cd \${WORK_DIR}
       
-      EOF\n
+      EOF
       
       cat > setup_opticks.sh << EOF
       #------------------------------------------------------------------------------------
