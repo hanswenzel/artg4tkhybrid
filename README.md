@@ -1,5 +1,6 @@
 # build Opticks
-We want to build opticks with exactly the same tools that we use to build artg4tk later on.    
+We want to build opticks with exactly the same tools that we use to build artg4tk later on. 
+
       cat > setup_test.sh << EOF
       export TOP_DIR=${PWD}
       source /cvmfs/larsoft.opensciencegrid.org/products/setup
