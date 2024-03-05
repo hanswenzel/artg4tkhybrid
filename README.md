@@ -178,27 +178,29 @@ tail -f install_full.log
 ```
 # build CaTS
 
-CaTSis a stand alone Geant4 application. Building and running CaTS is a good test that the environment as well as NVIDIA drivers are setu correctly.
+CaTSis a stand alone Geant4 application. Building and running CaTS is a good test that the environment as well as NVIDIA drivers are setup correctly.
 
-      git clone https://github.com/hanswenzel/CaTS.git
-      cd CaTS/
-      source (path to opticks WORK_DIR)/setup_opticks.sh 
-      cd ../
-      mkdir CaTS-build
-      cd CaTS-build
+```bash 
+git clone https://github.com/hanswenzel/CaTS.git
+cd CaTS/
+source (path to opticks WORK_DIR)/setup_opticks.sh 
+cd ../
+mkdir CaTS-build
+cd CaTS-build
 
-      cmake -GNinja -DCMAKE_BUILD_TYPE=Release \
-        -DWITH_G4CXOPTICKS=ON \
-        -DCMAKE_PREFIX_PATH="${LOCAL_BASE}/opticks/externals;${LOCAL_BASE}/opticks" \
-        -DOPTICKS_PREFIX=${LOCAL_BASE}/opticks \
-        -DCMAKE_MODULE_PATH=${OPTICKS_HOME}/cmake/Modules \
-        -DCMAKE_INSTALL_PREFIX=../CaTS-install \
-        ../CaTS
+cmake -GNinja -DCMAKE_BUILD_TYPE=Release \
+-DWITH_G4CXOPTICKS=ON \
+-DCMAKE_PREFIX_PATH="${LOCAL_BASE}/opticks/externals;${LOCAL_BASE}/opticks" \
+-DOPTICKS_PREFIX=${LOCAL_BASE}/opticks \
+-DCMAKE_MODULE_PATH=${OPTICKS_HOME}/cmake/Modules \
+-DCMAKE_INSTALL_PREFIX=../CaTS-install \
+../CaTS
 
-      ninja install
-      cd ../CaTS-install/bin
-      export LD_LIBRARY_PATH=.:$LD_LIBRARY_PATH
-      ./CaTS -g simpleLArTPC.gdml  -m time.mac
+ninja install
+cd ../CaTS-install/bin
+export LD_LIBRARY_PATH=.:$LD_LIBRARY_PATH
+./CaTS -g simpleLArTPC.gdml  -m time.mac
+```
 
 # build artg4tk vs Opticks     
       
