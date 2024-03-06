@@ -213,7 +213,6 @@ export LD_LIBRARY_PATH=.:$LD_LIBRARY_PATH
  #
  # Build artg4tk and envs
  #
- cd ${TOP_DIR}
  rm -rf artg4tktest
  source /cvmfs/larsoft.opensciencegrid.org/products/setup
  setup larsoft v09_74_00 -qe20:prof
@@ -228,7 +227,7 @@ export LD_LIBRARY_PATH=.:$LD_LIBRARY_PATH
  mkdir artg4tktest
  cd artg4tktest
  mrb newDev  -v v12_00 -q e20:prof
- source ${TOP_DIR}/artg4tktest/localProducts_artg4tk_v12_00_e20_prof/setup
+ source ${WORK_DIR}/artg4tktest/localProducts_artg4tk_v12_00_e20_prof/setup
  cd $MRB_SOURCE
  mrb g artg4tk
  mrbsetenv
@@ -239,9 +238,7 @@ export LD_LIBRARY_PATH=.:$LD_LIBRARY_PATH
  export OPTICKS_OPTIX_PREFIX=${OptiX_INSTALL_DIR}
  export OPTICKS_PREFIX=${LOCAL_BASE}/opticks
  export CUDA_INSTALL_DIR=/opt/nvidia/hpc_sdk/Linux_x86_64/23.3/cuda/11.8
- mrb b -j 10 -DWITH_G4CXOPTICKS=ON  \
-            -DCMAKE_PREFIX_PATH="${LOCAL_BASE}/opticks/externals;${LOCAL_BASE}/opticks;${OptiX_INSTALL_DIR}" \
-            -DOPTICKS_PREFIX=${LOCAL_BASE}/opticks 
+ ls 
  #
  # no need
  #
@@ -261,9 +258,6 @@ export LD_LIBRARY_PATH=.:$LD_LIBRARY_PATH
  export CUDA_SAMPLES=/data/software/cuda-samples
  export CMAKE_PREFIX_PATH="/cvmfs/larsoft.opensciencegrid.org/products/boost/v1_80_0/Linux64bit+3.10-2.17-e20-prof:${G4INSTALL}:${LOCAL_BASE}/opticks/externals:${OptiX_INSTALL_DIR}:${WORK_DIR}/opticks/cmake/Modules:${WORK_DIR}/local/opticks:${WORK_DIR}/local/opticks:${CLHEP_BASE_DIR}"
 
- ${OptiX_INSTALL_DIR}
-
- source /data/syjun/g4gpu/setup_test.sh
 export WORK_DIR=${PWD}
 export OptiX_INSTALL_DIR=/home/wenzel/NVIDIA-OptiX-SDK-7.5.0-linux64-x86_64
 # below are various Geant4 versions:
