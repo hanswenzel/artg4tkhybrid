@@ -260,7 +260,6 @@ export LD_LIBRARY_PATH=.:$LD_LIBRARY_PATH
 
 export WORK_DIR=${PWD}
 export OptiX_INSTALL_DIR=/home/wenzel/NVIDIA-OptiX-SDK-7.5.0-linux64-x86_64
-# below are various Geant4 versions:
 export LOCAL_BASE=${WORK_DIR}/local
 export OPTICKS_HOME=${WORK_DIR}/opticks
 export OPTICKS_OPTIX_PREFIX=${OptiX_INSTALL_DIR}
