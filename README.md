@@ -50,8 +50,8 @@ export OPTICKS_OPTIX_PREFIX=/home/wenzel/NVIDIA-OptiX-SDK-7.5.0-linux64-x86_64
 export OPTICKS_CUDA_PREFIX=\${CUDA_INSTALL_DIR}
 export OPTICKS_EMBEDDED_COMMANDLINE_EXTRA="--rngmax 100 --rtx 1 --skipaheadstep 10000"
 export OPTICKS_MAX_PHOTON=10000000
-opticks-(){ . ${OPTICKS_HOME}/opticks.bash && opticks-env $* ; }
-op(){ op.sh $* ; }
+opticks-(){ . \${OPTICKS_HOME}/opticks.bash && opticks-env \$* ; }
+op(){ op.sh \$* ; }
 o(){ cd $(opticks-home) ; hg st ; }
 _path_prepend() {
 if [ -n "$2" ]; then
