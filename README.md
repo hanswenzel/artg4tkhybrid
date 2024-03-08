@@ -32,7 +32,7 @@ cat > setup_opticks.sh << EOF
 #export CSGOptiX=INFO
 #export SSim__stree_level=2
 #------------------------------------------------------------------------------------
-export WORK_DIR=${PWD}
+export WORK_DIR=\${PWD}
 # make sure you set OptiX_INSTALL_DIR,OPTICKS_COMPUTE_CAPABILITY,CUDA_INSTALL_DIR correctly for your system 
 export OptiX_INSTALL_DIR=/home/wenzel/NVIDIA-OptiX-SDK-7.5.0-linux64-x86_64
 export OPTICKS_COMPUTE_CAPABILITY=75
@@ -40,14 +40,14 @@ export CUDA_INSTALL_DIR=/opt/nvidia/hpc_sdk/Linux_x86_64/23.3/cuda/11.8
 export PATH=\${CUDA_INSTALL_DIR}/bin:$PATH
 export CUDA_SAMPLES=/data/software/cuda-samples
 export G4INSTALL=/cvmfs/larsoft.opensciencegrid.org/products/geant4/v4_11_1_p01ba/Linux64bit+3.10-2.17-e20-prof
-export LOCAL_BASE=${WORK_DIR}/local
-export  CMAKE_PREFIX_PATH=/cvmfs/larsoft.opensciencegrid.org/products/boost/v1_80_0/Linux64bit+3.10-2.17-e20-prof/:${G4INSTALL}:${LOCAL_BASE}/opticks/externals:${OptiX_INSTALL_DIR}:${WORK_DIR}/opticks/cmake/Modules/:${WORK_DIR}/local/opticks:${WORK_DIR}/local/opticks:${WORK_DIR}/local/opticks/externals/:${CLHEP_BASE_DIR}
-export PYTHONPATH=$WORK_DIR
-export OPTICKS_HOME=${WORK_DIR}/opticks
-export OPTICKS_PREFIX=${WORK_DIR}/local/opticks                            
-export OPTICKS_INSTALL_PREFIX=$LOCAL_BASE/opticks
+export LOCAL_BASE=\${WORK_DIR}/local
+export  CMAKE_PREFIX_PATH=/cvmfs/larsoft.opensciencegrid.org/products/boost/v1_80_0/Linux64bit+3.10-2.17-e20-prof/:\${G4INSTALL}:\${LOCAL_BASE}/opticks/externals:\${OptiX_INSTALL_DIR}:\${WORK_DIR}/opticks/cmake/Modules/:\${WORK_DIR}/local/opticks:\${WORK_DIR}/local/opticks:\${WORK_DIR}/local/opticks/externals/:\${CLHEP_BASE_DIR}
+export PYTHONPATH=\$WORK_DIR
+export OPTICKS_HOME=\${WORK_DIR}/opticks
+export OPTICKS_PREFIX=\${WORK_DIR}/local/opticks                            
+export OPTICKS_INSTALL_PREFIX=\$LOCAL_BASE/opticks
 export OPTICKS_OPTIX_PREFIX=/home/wenzel/NVIDIA-OptiX-SDK-7.5.0-linux64-x86_64
-export OPTICKS_CUDA_PREFIX=${CUDA_INSTALL_DIR}
+export OPTICKS_CUDA_PREFIX=\${CUDA_INSTALL_DIR}
 export OPTICKS_EMBEDDED_COMMANDLINE_EXTRA="--rngmax 100 --rtx 1 --skipaheadstep 10000"
 export OPTICKS_MAX_PHOTON=10000000
 opticks-(){ . ${OPTICKS_HOME}/opticks.bash && opticks-env $* ; }
