@@ -55,21 +55,21 @@ op(){ op.sh \$* ; }
 o(){ cd \$(opticks-home) ; hg st ; }
 _path_prepend() {
 if [ -n "\$2" ]; then
-case ":\$(eval "echo \$$1"):" in
+case ":\$(eval "echo \$\$1"):" in
 *":$\2:"*) :;;
-*) eval "export $1=$2\${$1:+\":\$$1\"}" ;;
+*) eval "export $1=$2\${\$1:+\":\$\$1\"}" ;;
 esac
 else
-case ":$PATH:" in
-*":$1:"*) :;;
-*) export PATH="$1${PATH:+":$PATH"}" ;;
+case ":\$PATH:" in
+*":\$1:"*) :;;
+*) export PATH="$\1\${PATH:+":\$PATH"}" ;;
 esac
 fi
 }
 _path_append() {
-if [ -n "$2" ]; then
-case ":$(eval "echo \$$1"):" in
-*":$2:"*) :;;
+if [ -n "\$2" ]; then
+case ":\$(eval "echo \$\$1"):" in
+*":\$2:"*) :;;
 *) eval "export $1=\${$1:+\"\$$1:\"}$2" ;;
 esac
 else
@@ -148,24 +148,24 @@ esac
 oinfo-(){
 echo 'LD_LIBRARY_PATH:';
 echo '================';
-echo  ${LD_LIBRARY_PATH}| tr : \\n;
+echo  \${LD_LIBRARY_PATH}| tr : \\\\n;
 echo;
 echo 'PATH:';
 echo '=====';
-echo  ${PATH}| tr : \\n;
+echo  \${PATH}| tr : \\\\n;
 echo;
 echo 'CMAKE_PREFIX_PATH:';
 echo '==================';
-echo  ${CMAKE_PREFIX_PATH}| tr : \\n;
+echo  \${CMAKE_PREFIX_PATH}| tr : \\\\n;
 }
 dinfo-(){    
 nvidia-smi;
-${CUDA_SAMPLES}/bin/x86_64/linux/release/deviceQuery
+\${CUDA_SAMPLES}/bin/x86_64/linux/release/deviceQuery
 }
 export OPTICKS_KEY=CaTS.X4PhysicalVolume.World_PV.6a511c07e6d72b5e4d71b74bd548e8fd
 EOF
 
-```
+`rm test.sh``
  Now setup the environment and build the Opticks externals and Opticks itself.  
 
 ```bash 
