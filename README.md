@@ -73,26 +73,26 @@ case ":$(eval "echo \$$1"):" in
 *) eval "export $1=\${$1:+\"\$$1:\"}$2" ;;
 esac
 else
-case ":$PATH:" in
-*":$1:"*) :;;
-*) export PATH="${PATH:+"$PATH:"}$1" ;;
+case ":\$PATH:" in
+*":\$1:"*) :;;
+*) export PATH="\${PATH:+"$PATH:"}$1" ;;
 esac
 fi
 }
-_path_prepend "${LOCAL_BASE}/bin"
+_path_prepend "\${LOCAL_BASE}/bin"
 # make sure to add the compiler options
 new=" -fPIC" 
-case ":${CXXFLAGS:=$new}:" in
+case ":\${CXXFLAGS:=$new}:" in
 *:"$new":*)  ;;
-*) CXXFLAGS="$CXXFLAGS:$new"  ;;
+*) CXXFLAGS="$CXXFLAGS:\$new"  ;;
 esac
 new=" -fPIC" 
-case ":${CFLAGS:=$new}:" in
-*:"$new":*)  ;;
-*) CFLAGS="$CFLAGS:$new"  ;;
+case ":\${CFLAGS:=\$new}:" in
+*:"\$new":*)  ;;
+*) CFLAGS="\$CFLAGS:\$new"  ;;
 esac
 # speed up the make process
-new=" -j$(($(grep -c ^processor /proc/cpuinfo) - 1))" 
+new=" -j\$((\$(grep -c ^processor /proc/cpuinfo) - 1))" 
 case ":${MAKEFLAGS:=$new}:" in
 *:"$new":*)  ;;
 *) MAKEFLAGS="$MAKEFLAGS:$new"  ;;
