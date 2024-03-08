@@ -52,7 +52,7 @@ export OPTICKS_EMBEDDED_COMMANDLINE_EXTRA="--rngmax 100 --rtx 1 --skipaheadstep 
 export OPTICKS_MAX_PHOTON=10000000
 opticks-(){ . \${OPTICKS_HOME}/opticks.bash && opticks-env \$* ; }
 op(){ op.sh \$* ; }
-o(){ cd $(opticks-home) ; hg st ; }
+o(){ cd \$(opticks-home) ; hg st ; }
 _path_prepend() {
 if [ -n "$2" ]; then
 case ":$(eval "echo \$$1"):" in
