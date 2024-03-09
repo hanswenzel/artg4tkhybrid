@@ -42,7 +42,7 @@ export CUDA_SAMPLES=/data/software/cuda-samples
 export G4INSTALL=/cvmfs/larsoft.opensciencegrid.org/products/geant4/v4_11_1_p01ba/Linux64bit+3.10-2.17-e20-prof
 export LOCAL_BASE=\${WORK_DIR}/local
 export  CMAKE_PREFIX_PATH=/cvmfs/larsoft.opensciencegrid.org/products/boost/v1_80_0/Linux64bit+3.10-2.17-e20-prof/:\${G4INSTALL}:\${LOCAL_BASE}/opticks/externals:\${OptiX_INSTALL_DIR}:\${WORK_DIR}/opticks/cmake/Modules/:\${WORK_DIR}/local/opticks:\${WORK_DIR}/local/opticks:\${WORK_DIR}/local/opticks/externals/:\${CLHEP_BASE_DIR}
-export PYTHONPATH=\$WORK_DIR
+export PYTHONPATH=\${WORK_DIR}
 export OPTICKS_HOME=\${WORK_DIR}/opticks
 export OPTICKS_PREFIX=\${WORK_DIR}/local/opticks                            
 export OPTICKS_INSTALL_PREFIX=\$LOCAL_BASE/opticks
@@ -55,14 +55,14 @@ op(){ op.sh \$* ; }
 o(){ cd \$(opticks-home) ; hg st ; }
 _path_prepend() {
 if [ -n "\$2" ]; then
-case ":\$(eval "echo \\$\$1"):" in
+case ":\$(eval "echo \$\$1"):" in
 *":$\2:"*) :;;
-*) eval "export $1=$2\${\$1:+\":\\$\$1\"}" ;;
+*) eval "export $1=$2\${\$1:+\":\$\$1\"}" ;;
 esac
 else
 case ":\$PATH:" in
 *":\$1:"*) :;;
-*) export PATH="$\1\${PATH:+":\$PATH"}" ;;
+*) export PATH="\$\1\${PATH:+":\$PATH"}" ;;
 esac
 fi
 }
@@ -98,7 +98,7 @@ case ":${MAKEFLAGS:=$new}:" in
 *) MAKEFLAGS="$MAKEFLAGS:$new"  ;;
 esac
 # deal with the $LD_LIBRARYPATH
-new=${OptiX_INSTALL_DIR}/lib64/
+new=\${OptiX_INSTALL_DIR}/lib64/
 case ":${LD_LIBRARY_PATH:=$new}:" in
 *:"$new":*)  ;;
 *) LD_LIBRARY_PATH="$new:$LD_LIBRARY_PATH"  ;;
@@ -121,29 +121,29 @@ esac
 
 opticks-
 new=${CUDA_INSTALL_DIR}/bin
-case ":${PATH:=$new}:" in
-*:"$new":*)  ;;
-*) PATH="$new:$PATH"  ;;
+case ":\${PATH:=\$new}:" in
+*:"\$new":*)  ;;
+*) PATH="\$new:\$PATH"  ;;
 esac
 new=${OPTICKS_HOME}/bin/
-case ":${PATH:=$new}:" in
-*:"$new":*)  ;;
-*) PATH="$new:$PATH"  ;;
+case ":\${PATH:=\$new}:" in
+*:"\$new":*)  ;;
+*) PATH="\$new:\$PATH"  ;;
 esac
 new=${OPTICKS_HOME}/ana/
-case ":${PATH:=$new}:" in
-*:"$new":*)  ;;
-*) PATH="$new:$PATH"  ;;
+case ":\${PATH:=\$new}:" in
+*:"\$new":*)  ;;
+*) PATH="\$new:\$PATH"  ;;
 esac
-new=${LOCAL_BASE}/opticks/lib/
-case ":${PATH:=$new}:" in
-*:"$new":*)  ;;
-*) PATH="$new:$PATH"  ;;
+new=\${LOCAL_BASE}/opticks/lib/
+case ":\${PATH:=\$new}:" in
+*:"\$new":*)  ;;
+*) PATH="\$new:\$PATH"  ;;
 esac
-new=${CUDA_SAMPLES}/bin/x86_64/linux/release/
-case ":${PATH:=$new}:" in
-*:"$new":*)  ;;
-*) PATH="$new:$PATH"  ;;
+new=\${CUDA_SAMPLES}/bin/x86_64/linux/release/
+case ":\${PATH:=\$new}:" in
+*:"\$new":*)  ;;
+*) PATH="\$new:\$PATH"  ;;
 esac
 oinfo-(){
 echo 'LD_LIBRARY_PATH:';
