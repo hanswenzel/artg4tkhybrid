@@ -55,9 +55,9 @@ op(){ op.sh \$* ; }
 o(){ cd \$(opticks-home) ; hg st ; }
 _path_prepend() {
 if [ -n "\$2" ]; then
-case ":\$(eval "echo \$\$1"):" in
+case ":\$(eval "echo \\$\$1"):" in
 *":$\2:"*) :;;
-*) eval "export $1=$2\${\$1:+\":\$\$1\"}" ;;
+*) eval "export $1=$2\${\$1:+\":\\$\$1\"}" ;;
 esac
 else
 case ":\$PATH:" in
@@ -70,20 +70,20 @@ _path_append() {
 if [ -n "\$2" ]; then
 case ":\$(eval "echo \$\$1"):" in
 *":\$2:"*) :;;
-*) eval "export $1=\${$1:+\"\$$1:\"}$2" ;;
+*) eval "export $1=\${\$1:+\"\$\$1:\"}$2" ;;
 esac
 else
 case ":\$PATH:" in
 *":\$1:"*) :;;
-*) export PATH="\${PATH:+"$PATH:"}$1" ;;
+*) export PATH="\${PATH:+"\$PATH:"}\$1" ;;
 esac
 fi
 }
 _path_prepend "\${LOCAL_BASE}/bin"
 # make sure to add the compiler options
 new=" -fPIC" 
-case ":\${CXXFLAGS:=$new}:" in
-*:"$new":*)  ;;
+case ":\${CXXFLAGS:=\$new}:" in
+*:"\$new":*)  ;;
 *) CXXFLAGS="$CXXFLAGS:\$new"  ;;
 esac
 new=" -fPIC" 
