@@ -108,7 +108,7 @@ case ":${LD_LIBRARY_PATH:=$new}:" in
 *:"$new":*)  ;;
 *) LD_LIBRARY_PATH="$new:$LD_LIBRARY_PATH"  ;;
 esac
-new=${CUDA_INSTALL_DIR}/lib64/
+new=\${CUDA_INSTALL_DIR}/lib64/
 case ":${LD_LIBRARY_PATH:=$new}:" in
 *:"$new":*)  ;;
 *) LD_LIBRARY_PATH="$new:$LD_LIBRARY_PATH"  ;;
@@ -125,12 +125,12 @@ case ":\${PATH:=\$new}:" in
 *:"\$new":*)  ;;
 *) PATH="\$new:\$PATH"  ;;
 esac
-new=${OPTICKS_HOME}/bin/
+new=\${OPTICKS_HOME}/bin/
 case ":\${PATH:=\$new}:" in
 *:"\$new":*)  ;;
 *) PATH="\$new:\$PATH"  ;;
 esac
-new=${OPTICKS_HOME}/ana/
+new=\${OPTICKS_HOME}/ana/
 case ":\${PATH:=\$new}:" in
 *:"\$new":*)  ;;
 *) PATH="\$new:\$PATH"  ;;
