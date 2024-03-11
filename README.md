@@ -100,9 +100,9 @@ case ":\${CFLAGS:=\$new}:" in
 esac
 # speed up the make process
 new=" -j\$((\$(grep -c ^processor /proc/cpuinfo) - 1))"
-case ":${MAKEFLAGS:=$new}:" in
-*:"$new":*)  ;;
-*) MAKEFLAGS="$MAKEFLAGS:$new"  ;;
+case ":\${MAKEFLAGS:=\$new}:" in
+*:"\$new":*)  ;;
+*) MAKEFLAGS="\$MAKEFLAGS:\$new"  ;;
 esac
 # deal with the $LD_LIBRARYPATH
 new=\${OptiX_INSTALL_DIR}/lib64/
