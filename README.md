@@ -104,30 +104,30 @@ case ":\${MAKEFLAGS:=\$new}:" in
 *:"\$new":*)  ;;
 *) MAKEFLAGS="\$MAKEFLAGS:\$new"  ;;
 esac
-# deal with the $LD_LIBRARYPATH
+# deal with the LD_LIBRARYPATH
 new=\${OptiX_INSTALL_DIR}/lib64/
-case ":${LD_LIBRARY_PATH:=$new}:" in
-*:"$new":*)  ;;
-*) LD_LIBRARY_PATH="$new:$LD_LIBRARY_PATH"  ;;
+case ":\${LD_LIBRARY_PATH:=\$new}:" in
+*:"\$new":*)  ;;
+*) LD_LIBRARY_PATH="\$new:\$LD_LIBRARY_PATH"  ;;
 esac
-new=${OPTICKS_HOME}/externals/lib
-case ":${LD_LIBRARY_PATH:=$new}:" in
-*:"$new":*)  ;;
-*) LD_LIBRARY_PATH="$new:$LD_LIBRARY_PATH"  ;;
+new=\${OPTICKS_HOME}/externals/lib
+case ":\${LD_LIBRARY_PATH:=\$new}:" in
+*:"\$new":*)  ;;
+*) LD_LIBRARY_PATH="\$new:$LD_LIBRARY_PATH"  ;;
 esac
 new=\${CUDA_INSTALL_DIR}/lib64/
-case ":${LD_LIBRARY_PATH:=$new}:" in
-*:"$new":*)  ;;
-*) LD_LIBRARY_PATH="$new:$LD_LIBRARY_PATH"  ;;
+case ":\${LD_LIBRARY_PATH:=\$new}:" in
+*:"\$new":*)  ;;
+*) LD_LIBRARY_PATH="\$new:\$LD_LIBRARY_PATH"  ;;
 esac
-new=${LOCAL_BASE}/opticks/lib/
-case ":${LD_LIBRARY_PATH:=$new}:" in
-*:"$new":*)  ;;
-*) LD_LIBRARY_PATH="$new:$LD_LIBRARY_PATH"  ;;
+new=\${LOCAL_BASE}/opticks/lib/
+case ":\${LD_LIBRARY_PATH:=\$new}:" in
+*:"\$new":*)  ;;
+*) LD_LIBRARY_PATH="\$new:\$LD_LIBRARY_PATH"  ;;
 esac
 
 opticks-
-new=${CUDA_INSTALL_DIR}/bin
+new=\${CUDA_INSTALL_DIR}/bin
 case ":\${PATH:=\$new}:" in
 *:"\$new":*)  ;;
 *) PATH="\$new:\$PATH"  ;;
@@ -167,7 +167,7 @@ echo  \${CMAKE_PREFIX_PATH}| tr : \\\\n;
 }
 dinfo-(){    
 nvidia-smi;
-\${CUDA_SAMPLES}/bin/x86_64/linux/release/deviceQuery
+\$CUDA_SAMPLES/bin/x86_64/linux/release/deviceQuery
 }
 export OPTICKS_KEY=CaTS.X4PhysicalVolume.World_PV.6a511c07e6d72b5e4d71b74bd548e8fd
 
