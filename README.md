@@ -33,7 +33,8 @@ cat > setup_opticks.sh << EOF
 #export CSGOptiX=INFO
 #export SSim__stree_level=2
 #------------------------------------------------------------------------------------
-
+export WORK_DIR=\${PWD}
+export OPTICKS_HOME=\${PWD}/opticks 
 opticks-(){ . \${OPTICKS_HOME}/opticks.bash && opticks-env \$* ; }
 #op(){ op.sh \$* ; }
 #o(){ cd \$(opticks-home) ; hg st ; }
@@ -64,16 +65,13 @@ esac
 fi
 }
 export CUDA_INSTALL_DIR=/opt/nvidia/hpc_sdk/Linux_x86_64/23.3/cuda/11.8
-export PATH=\${CUDA_INSTALL_DIR}/bin:\$PATH
+#export PATH=\${CUDA_INSTALL_DIR}/bin:\$PATH
 _path_prepend "\${CUDA_INSTALL_DIR}/bin"
 
 
-export WORK_DIR=\${PWD}
 # make sure you set OptiX_INSTALL_DIR,OPTICKS_COMPUTE_CAPABILITY,CUDA_INSTALL_DIR correctly for your system 
 export OptiX_INSTALL_DIR=/home/wenzel/NVIDIA-OptiX-SDK-7.5.0-linux64-x86_64
 export OPTICKS_COMPUTE_CAPABILITY=75
-export CUDA_INSTALL_DIR=/opt/nvidia/hpc_sdk/Linux_x86_64/23.3/cuda/11.8
-export PATH=\${CUDA_INSTALL_DIR}/bin:\$PATH
 export CUDA_SAMPLES=/data/software/cuda-samples
 export G4INSTALL=/cvmfs/larsoft.opensciencegrid.org/products/geant4/v4_11_1_p01ba/Linux64bit+3.10-2.17-e20-prof
 export LOCAL_BASE=\${WORK_DIR}/local
@@ -101,7 +99,7 @@ case ":\${CFLAGS:=\$new}:" in
 *) CFLAGS="\$CFLAGS:\$new"  ;;
 esac
 # speed up the make process
-new=" -j\$((\$(grep -c ^processor /proc/cpuinfo) - 1))" 
+new=" -j\$((\$(grep -c ^processor /proc/cpuinfo) - 1))"
 case ":${MAKEFLAGS:=$new}:" in
 *:"$new":*)  ;;
 *) MAKEFLAGS="$MAKEFLAGS:$new"  ;;
