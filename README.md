@@ -17,6 +17,7 @@ mkdir -p \${WORK_DIR}/local/opticks/externals/
 cd \${WORK_DIR}/local/opticks/externals/
 ln -s \${OptiX_INSTALL_DIR} OptiX
 cd \${WORK_DIR}
+
 EOF
 ```
 create a setup script for Opticks
@@ -41,7 +42,7 @@ export PATH=\${CUDA_INSTALL_DIR}/bin:\$PATH
 export CUDA_SAMPLES=/data/software/cuda-samples
 export G4INSTALL=/cvmfs/larsoft.opensciencegrid.org/products/geant4/v4_11_1_p01ba/Linux64bit+3.10-2.17-e20-prof
 export LOCAL_BASE=\${WORK_DIR}/local
-export  CMAKE_PREFIX_PATH=/cvmfs/larsoft.opensciencegrid.org/products/boost/v1_80_0/Linux64bit+3.10-2.17-e20-prof/:\${G4INSTALL}:\${LOCAL_BASE}/opticks/externals:\${OptiX_INSTALL_DIR}:\${WORK_DIR}/opticks/cmake/Modules/:\${WORK_DIR}/local/opticks:\${WORK_DIR}/local/opticks:\${WORK_DIR}/local/opticks/externals/:\${CLHEP_BASE_DIR}
+export CMAKE_PREFIX_PATH=/cvmfs/larsoft.opensciencegrid.org/products/boost/v1_80_0/Linux64bit+3.10-2.17-e20-prof/:\${G4INSTALL}:\${LOCAL_BASE}/opticks/externals:\${OptiX_INSTALL_DIR}:\${WORK_DIR}/opticks/cmake/Modules/:\${WORK_DIR}/local/opticks:\${WORK_DIR}/local/opticks:\${WORK_DIR}/local/opticks/externals/:\${CLHEP_BASE_DIR}
 export PYTHONPATH=\${WORK_DIR}
 export OPTICKS_HOME=\${WORK_DIR}/opticks
 export OPTICKS_PREFIX=\${WORK_DIR}/local/opticks                            
@@ -55,20 +56,20 @@ op(){ op.sh \$* ; }
 o(){ cd \$(opticks-home) ; hg st ; }
 _path_prepend() {
 if [ -n "\$2" ]; then
-case ":\$(eval "echo \$\$1"):" in
-*":$\2:"*) :;;
-*) eval "export $1=$2\${\$1:+\":\$\$1\"}" ;;
+case ":\$(eval "echo \\$\$1"):" in
+*":\$2:"*) :;;
+*) eval "export \$1=\$2\${\$1:+\":\$\$1\"}" ;;
 esac
 else
 case ":\$PATH:" in
 *":\$1:"*) :;;
-*) export PATH="\$\1\${PATH:+":\$PATH"}" ;;
+*) export PATH="\$1\${PATH:+":\$PATH"}" ;;
 esac
 fi
 }
 _path_append() {
 if [ -n "\$2" ]; then
-case ":\$(eval "echo \$\$1"):" in
+case ":\$(eval "echo \\$\$1"):" in
 *":\$2:"*) :;;
 *) eval "export $1=\${\$1:+\"\$\$1:\"}$2" ;;
 esac
@@ -163,9 +164,9 @@ nvidia-smi;
 \${CUDA_SAMPLES}/bin/x86_64/linux/release/deviceQuery
 }
 export OPTICKS_KEY=CaTS.X4PhysicalVolume.World_PV.6a511c07e6d72b5e4d71b74bd548e8fd
+
 EOF
 
-`rm test.sh``
  Now setup the environment and build the Opticks externals and Opticks itself.  
 
 ```bash 
