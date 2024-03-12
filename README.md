@@ -183,10 +183,11 @@ nvidia-smi;
 export OPTICKS_KEY=CaTS.X4PhysicalVolume.World_PV.6a511c07e6d72b5e4d71b74bd548e8fd
 
 EOF
+```bash
 
  Now setup the environment and build the Opticks externals and Opticks itself.  
 
-```bash 
+```bash
 source setup_opticks.sh
 opticks-externals-install >& install_ext.log &
 tail -f install_ext.log
