@@ -67,6 +67,7 @@ fi
 export CUDA_INSTALL_DIR=/opt/nvidia/hpc_sdk/Linux_x86_64/23.3/cuda/11.8
 #export PATH=\${CUDA_INSTALL_DIR}/bin:\$PATH
 _path_prepend "\${CUDA_INSTALL_DIR}/bin"
+_path_prepend "."
 
 
 # make sure you set OptiX_INSTALL_DIR,OPTICKS_COMPUTE_CAPABILITY,CUDA_INSTALL_DIR correctly for your system 
@@ -125,7 +126,11 @@ case ":\${LD_LIBRARY_PATH:=\$new}:" in
 *:"\$new":*)  ;;
 *) LD_LIBRARY_PATH="\$new:\$LD_LIBRARY_PATH"  ;;
 esac
-
+new="."
+case ":\${LD_LIBRARY_PATH:=\$new}:" in
+*:"\$new":*)  ;;
+*) LD_LIBRARY_PATH="\$new:\$LD_LIBRARY_PATH"  ;;
+esac
 opticks-
 new=\${CUDA_INSTALL_DIR}/bin
 case ":\${PATH:=\$new}:" in
