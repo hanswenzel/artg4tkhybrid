@@ -34,6 +34,12 @@ cat > setup_opticks.sh << EOF
 #export SSim__stree_level=2
 #------------------------------------------------------------------------------------
 export WORK_DIR=\${PWD}
+source /cvmfs/larsoft.opensciencegrid.org/products/setup
+setup larsoft v09_74_00 -qe20:prof
+unsetup geant4
+setup geant4 v4_11_1_p01ba -q e20:prof
+setup ninja v1_11_0
+setup cmake v3_27_4
 export OPTICKS_HOME=\${PWD}/opticks 
 opticks-(){ . \${OPTICKS_HOME}/opticks.bash && opticks-env \$* ; }
 #op(){ op.sh \$* ; }
@@ -192,6 +198,7 @@ tail -f install_full.log
 git clone https://github.com/hanswenzel/artg4tkhybrid.git
 cp artg4tkhybrid/cmake/OpticksOptionsAsExternal.cmake opticks/cmake/Modules/
 ```
+
 # build CaTS
 
 CaTSi s a stand alone Geant4 application. Building and running CaTS is a good test that the environment as well as NVIDIA drivers are setup correctly.
