@@ -9,10 +9,13 @@ unsetup geant4
 setup geant4 v4_11_1_p01ba -q e20:prof
 setup ninja v1_11_0
 setup cmake v3_27_4
+to check  out a specific tage of opticks do:
 git clone https://github.com/simoncblyth/opticks.git
 cd opticks
 git tag
 git checkout v0.2.7
+for the latest version of opticks do 
+git clone https://bitbucket.org/simoncblyth/opticks
 mkdir -p \${WORK_DIR}/local/opticks/externals/
 cd \${WORK_DIR}/local/opticks/externals/
 ln -s \${OptiX_INSTALL_DIR} OptiX
